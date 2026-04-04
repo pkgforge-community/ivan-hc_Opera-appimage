@@ -30,9 +30,9 @@ fi
 
 _create_opera_appimage(){
 	if wget --version | head -1 | grep -q ' 1.'; then
-		wget -q --no-verbose --show-progress --progress=bar "https://deb.opera.com/opera-stable/pool/non-free/o/$APP-$CHANNEL/$(wget -q https://deb.opera.com/"$APP"-"$CHANNEL"/pool/non-free/o/"$APP"-"$CHANNEL"/ -O - | grep deb | tail -1 | grep -o -P '(?<=.deb">).*(?=</a>)')" || exit 1
+		wget -q --no-verbose --show-progress --progress=bar "https://deb.opera.com/opera-stable/pool/non-free/o/$APP-$CHANNEL/$(wget -q https://deb.opera.com/"$APP"-"$CHANNEL"/pool/non-free/o/"$APP"-"$CHANNEL"/ -O - | grep deb | grep -i "x86_64\|amd64" | tail -1 | grep -o -P '(?<=.deb">).*(?=</a>)')" || exit 1
 	else
-		wget "https://deb.opera.com/opera-stable/pool/non-free/o/$APP-$CHANNEL/$(wget -q https://deb.opera.com/opera-stable/pool/non-free/o/"$APP"-"$CHANNEL"/ -O - | grep deb | tail -1 | grep -o -P '(?<=.deb">).*(?=</a>)')" || exit 1
+		wget "https://deb.opera.com/opera-stable/pool/non-free/o/$APP-$CHANNEL/$(wget -q https://deb.opera.com/opera-stable/pool/non-free/o/"$APP"-"$CHANNEL"/ -O - | grep deb | grep -i "x86_64\|amd64" | tail -1 | grep -o -P '(?<=.deb">).*(?=</a>)')" || exit 1
 	fi
 	ar x ./*.deb
 	tar xf ./data.tar.xz
